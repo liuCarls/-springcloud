@@ -1,0 +1,25 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+      label: master
+      profile: dev
+#      uri: http://localhost:8888/
+#      将config-server的URL硬编码机制改成，通过服务中心根据名字自动发现机制
+      discovery:
+        enabled: true
+        serviceId: config-server
+server:
+  port: 8881
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: refresh,health

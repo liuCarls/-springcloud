@@ -1,0 +1,21 @@
+#服务器发现注册配置
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+#服务器配置
+server:
+  port: 8762
+#spring配置
+spring:
+  application:
+    name: service-helloworld
+
+#安全配置
+security:
+  oauth2:
+    resource:
+      id: service-helloworld
+      #指定用户信息地址
+      user-info-uri: https://api.apiboot.cn/auth/user
+      prefer-token-info: false

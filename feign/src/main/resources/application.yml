@@ -1,0 +1,17 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8902
+spring:
+  application:
+    name: service-feign
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        serviceId: compute-server
+feign:
+  hystrix:
+    enabled: true #打开对Hystrix断路由
