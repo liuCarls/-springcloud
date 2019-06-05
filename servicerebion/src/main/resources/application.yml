@@ -6,5 +6,5 @@ server:
   port: 8901
 spring:
   application:
-    name: ribbon
+    name: service-ribbon
 # 这个配置文件可以不要，端口默认8080
