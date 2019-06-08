@@ -1,4 +1,6 @@
 https://github.com/dyc87112/SpringBoot-Learning/tree/1.x
+https://docs.spring.io/spring-security/site/docs/5.1.5.RELEASE/reference/htmlsingle/#ldap-sample
+
 
 Thymeleaf是一个XML/XHTML/HTML5模板引擎，可用于Web与非Web环境中的应用开发。
 在Spring Boot中使用Thymeleaf，只需要引入下面依赖，

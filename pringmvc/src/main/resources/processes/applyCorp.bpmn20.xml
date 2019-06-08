@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+        xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+        xmlns:activiti="http://activiti.org/bpmn"
+        targetNamespace="Examples">
+    <!--某人想加入某个公司，
+    然后有权限审批的人审批，审批同意后将此人加入组织并输出“加入组织成功”，
+    不同意输出“加入组织失败”。-->
+<process id="joinProcess" name="Join process" isExecutable="true">
+
+<startEvent id="startevent1" name="Start">
+    <extensionElements>
+        <activiti:formProperty id="personId" name="person id"
+                               type="long" required="true"/>
+
+        <activiti:formProperty id="compId" name="company Id"
+                               type="long" required="true"/>
+    </extensionElements>
+ </startEvent>
+
+
+<endEvent id="endevent1" name="End"/>
+<userTask id="ApprovalTask" name="Approval Task"
+    activiti:candidateUsers="${joinService.findUsers(execution)}"
+    isForCompensation="true">
+    <extensionElements>
+        <activiti:formProperty id="joinApproved" name="Join Approved" type="enum">
+            <activiti:value id="true" name="Approve" />
+            <activiti:value id="false" name="Reject"/>
+        </activiti:formProperty>
+    </extensionElements>
+ </userTask>
+<serviceTask id="AutoTask" name="Auto Task"
+             activiti:expression="${joinService.joinGroup(execution)}"/>
+
+<sequenceFlow id="flow1" sourceRef="startevent1" targetRef="ApprovalTask"/>
+<sequenceFlow id="flow2" sourceRef="ApprovalTask" targetRef="AutoTask"/>
+<sequenceFlow id="flow3" sourceRef="AutoTask" targetRef="endevent1"/>
+
+</process>
+</definitions>
+
+<!--
+ 流程实例只有一个，执行对象可以有多个（如果存在分支和聚合）
+ #正在执行的执行对象表
+select * from act_ru_execution where PROC_DEF_ID_ like 'join%';
+ #正在执行的任务表（只有节点是UserTask的时候，该表中才存在数据）
+select * from ACT_RU_TASK where PROC_DEF_ID_ like 'join%';
+select * from act_ru_identitylink where TASK_ID_ in (72515,72525);
+
+ #流程实例的历史表
+SELECT * FROM act_hi_procinst where PROC_DEF_ID_ like 'join%';
+ #任务历史表（只有节点是UserTask的时候，该表中才存在数据）
+SELECT * FROM act_hi_taskinst where PROC_DEF_ID_ like 'join%';
+ #所有节点的历史表
+SELECT * FROM act_hi_actinst where PROC_DEF_ID_ like 'join%';
+
+-->

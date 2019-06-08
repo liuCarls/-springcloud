@@ -1,19 +1,10 @@
 package com.lgx.springmvc;
 
 import org.apache.log4j.Logger;
-import org.springframework.http.HttpRequest;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import sun.plugin.liveconnect.SecurityContextHelper;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 请求入口Controller部分提供三种接口样例：视图模板，Json，restful风格

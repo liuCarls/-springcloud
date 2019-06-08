@@ -20,9 +20,34 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
+/**
+ * Spring Security的配置实际上也包含了创建过滤器与注册过滤器两个过程
+ *
+ *
+ * 当我们在一个类上添加@EnableWebSecurity注解后，
+ * Spring Security会自动帮助我们创建一个名字为的
+ * springSecurityFilterChain过滤器。这个过滤器实际上只
+ * 是Spring Security框架验证请求的一个入口，
+ * 到底如何验证请求实际上是要依赖于我们如何配置Spring Security。
+ * 配置的方式就是通过FormLoginConfigurer、HttpBasicConfigurer等这样的
+ * SecurityConfigurerAdapter的子类实现的，
+ * SecurityConfigurerAdapter是的SecurityConfigurer接口抽象子类。
+ * 通过HttpSecurity.getOrApply--->apply方法将configurer放入一
+ * 个LinkedHashMap的属性configurers中，同时会调用每一个
+ * SecurityConfigurer的configure方法，在这个方法里主要就
+ * 是在HttpSecurity对象中，添加一个对应的验证过滤器。
+ * 可以认为通过and()分割后的每段配置，实际上都是在HttpSecuirty中添加一个过滤器。
+ *
+ *
+ * 当然并不是每个SecurityConfigurer都是通过这种方式来创建过滤器的，
+ * 例如FormLoginConfigurer就直接在构造方法中来创建一个类型为
+ * UsernamePasswordAuthenticationFilter的过滤器
+ *
+ */
 @Configuration
 @EnableWebSecurity
 @Order(1) //配置多个 HttpSecurity 实例，就像我们可以在xml文件中配置多个 <http>一样。关键在于多次扩展 WebSecurityConfigurationAdapter
+
 //@EnableAutoConfiguration
 //  启用方法级别的权限认证
 //@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
@@ -79,7 +104,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers( "/static/**","/register");
+        web.ignoring().antMatchers( "/register","/models/create","/static/**");
     }
 
     /**
@@ -102,7 +127,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 })
                 .antMatchers("/user/**").hasRole("USER")
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and().csrf().disable()
                 .formLogin().loginPage("/login")
 //                loginProcessingUrl("/login").usernameParameter("username").passwordParameter("password").permitAll()
