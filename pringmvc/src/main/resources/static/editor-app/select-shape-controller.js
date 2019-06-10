@@ -43,7 +43,7 @@ var KisBpmShapeSelectionCtrl = [ '$rootScope', '$scope', '$timeout', '$translate
         multiSelect: false,
         keepLastSelected : false,
         selectedItems: $scope.selectedMorphShapes,
-        columnDefs: [{ field: 'objectId', displayName: 'Icon', width: 50, cellTemplate: 'editor-app/popups/icon-templates.html?version=' + Date.now() },
+        columnDefs: [{ field: 'objectId', displayName: 'Icon', width: 50, cellTemplate: 'editor-app/popups/icon-template.html?version=' + Date.now() },
             { field: 'name', displayName: 'Name'}]
     };
 

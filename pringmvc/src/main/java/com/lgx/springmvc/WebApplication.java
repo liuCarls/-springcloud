@@ -8,6 +8,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 @SpringBootApplication
+//@EnableAutoConfiguration(exclude = {
+////        org.activiti.spring.boot.SecurityAutoConfiguration.class,
+////        org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class
+////})
 //@MapperScan("cn.no7player.mapper")
 public class WebApplication {
     private static Logger logger = Logger.getLogger(WebApplication.class);

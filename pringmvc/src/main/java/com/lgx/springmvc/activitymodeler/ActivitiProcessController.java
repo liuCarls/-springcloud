@@ -13,8 +13,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import javax.annotation.Resource;
 
-@Controller
-@RequestMapping("/activiti")
+//@Controller
+//@RequestMapping("/activiti")
 public class ActivitiProcessController {
     @Resource
     private ActivitiService activitiServiceImpl;

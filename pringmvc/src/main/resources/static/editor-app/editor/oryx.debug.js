@@ -11834,7 +11834,7 @@ ORYX.Editor = {
 	*		draggin: bool
 	*		namespace: url
 	*       parent: ORYX.Core.AbstractShape
-	*		templates: a templates shape that the newly created inherits properties from.
+	*		template: a template shape that the newly created inherits properties from.
 	*		}
 	*/
 	createShape: function(option) {
@@ -11874,7 +11874,7 @@ ORYX.Editor = {
 			newShapeObject = new ORYX.Core.Edge({'eventHandlerCallback':this.handleEvents.bind(this)}, sset.stencil(shapetype), this._getPluginFacade())
 		}
 		
-		// when there is a templates, inherit the properties.
+		// when there is a template, inherit the properties.
 		if(option.template) {
 
 			newShapeObject._jsonStencil.properties = option.template._jsonStencil.properties;

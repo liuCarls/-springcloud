@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 /**
  * Created by Administrator on 2018/9/5.
  */
-@Mapper
+//@Mapper
 public interface ActIdUserMapper {
 
     ActIdUserEntity findUserById(String username, String password);

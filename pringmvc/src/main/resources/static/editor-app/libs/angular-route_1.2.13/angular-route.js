@@ -82,18 +82,18 @@ function $RouteProvider(){
    *      controller} if passed as a string.
    *    - `controllerAs` – `{string=}` – A controller alias name. If present the controller will be
    *      published to scope under the `controllerAs` name.
-   *    - `templates` – `{string=|function()=}` – html templates as a string or a function that
-   *      returns an html templates as a string which should be used by {@link
+   *    - `template` – `{string=|function()=}` – html template as a string or a function that
+   *      returns an html template as a string which should be used by {@link
    *      ngRoute.directive:ngView ngView} or {@link ng.directive:ngInclude ngInclude} directives.
    *      This property takes precedence over `templateUrl`.
    *
-   *      If `templates` is a function, it will be called with the following parameters:
+   *      If `template` is a function, it will be called with the following parameters:
    *
    *      - `{Array.<Object>}` - route parameters extracted from the current
    *        `$location.path()` by applying the current route
    *
    *    - `templateUrl` – `{string=|function()=}` – path or function that returns a path to an html
-   *      templates that should be used by {@link ngRoute.directive:ngView ngView}.
+   *      template that should be used by {@link ngRoute.directive:ngView ngView}.
    *
    *      If `templateUrl` is a function, it will be called with the following parameters:
    *
@@ -376,7 +376,7 @@ function $RouteProvider(){
      * @description
      * Broadcasted before a route change. At this  point the route services starts
      * resolving all of the dependencies needed for the route change to occur.
-     * Typically this involves fetching the view templates as well as any dependencies
+     * Typically this involves fetching the view template as well as any dependencies
      * defined in `resolve` route property. Once  all of the dependencies are resolved
      * `$routeChangeSuccess` is fired.
      *
@@ -885,7 +885,7 @@ function ngViewFactory(   $route,   $anchorScroll,   $animate) {
 }
 
 // This directive is called during the $transclude call of the first `ngView` directive.
-// It will replace and compile the content of the element with the loaded templates.
+// It will replace and compile the content of the element with the loaded template.
 // We need this directive so that the element content is already filled when
 // the link function of another directive on the same element as ngView
 // is called.

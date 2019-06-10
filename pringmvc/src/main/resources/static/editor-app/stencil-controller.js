@@ -574,7 +574,7 @@ angular.module('activitiModeler')
             }
         };
 
-        /* Helper method to retrieve the templates url for a property */
+        /* Helper method to retrieve the template url for a property */
         $scope.getPropertyTemplateUrl = function (index) {
             return $scope.selectedItem.properties[index].templateUrl;
         };
