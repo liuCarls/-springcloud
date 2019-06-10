@@ -92,16 +92,16 @@ public class ModelerController {
         repositoryService.deleteModel(id);
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/deploy")
-    public Object deploy(@RequestParam(name = "id") String id) throws Exception{
+//    @ResponseBody
+//    @RequestMapping(value = "/deploy")
+//    public Object deploy(@RequestParam(name = "id") String id) throws Exception{
         //获取模型
-        Model modelData = repositoryService.getModel(id);
-        byte[] bytes = repositoryService.getModelEditorSource(modelData.getId());
-        if (null == bytes){
-            return "模型数据为空，请先设计流程并成功保存，再进行发布。";
-        }
-        JsonNode modelNode = new ObjectMapper().readTree(bytes);
+//        Model modelData = repositoryService.getModel(id);
+//        byte[] bytes = repositoryService.getModelEditorSource(modelData.getId());
+//        if (null == bytes){
+//            return "模型数据为空，请先设计流程并成功保存，再进行发布。";
+//        }
+//        JsonNode modelNode = new ObjectMapper().readTree(bytes);
 //        BpmnModel model = new BpmnJsonConverter().convertToBpmnModel(modelNode);
 //        if (model.getProcesses().size() == 0){
 //            return "数据模型不符合要求，请至少设计一条主线程流。";
@@ -109,15 +109,15 @@ public class ModelerController {
 //        byte[] bpmnBytes = new BpmnXMLConverter().convertToXML(model);
 
         //发布流程
-        String processName = modelData.getName() + ".bpmn20.xml";
-//        Deployment deployment = repositoryService.createDeployment()
-//                .name(modelData.getName())
-//                .addString(processName, new String(bpmnBytes, "UTF-8"))
-//                .deploy();
-//        modelData.setDeploymentId(deployment.getId());
-        repositoryService.saveModel(modelData);
-        return "success";
-    }
+//        String processName = modelData.getName() + ".bpmn20.xml";
+////        Deployment deployment = repositoryService.createDeployment()
+////                .name(modelData.getName())
+////                .addString(processName, new String(bpmnBytes, "UTF-8"))
+////                .deploy();
+////        modelData.setDeploymentId(deployment.getId());
+//        repositoryService.saveModel(modelData);
+//        return "success";
+//    }
 
 
     @ResponseBody
