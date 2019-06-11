@@ -12,9 +12,9 @@ public class QuartzTest {
     public static void main(String[] args) {
         try {
             QuartzTest.test1();
-//            while (true) {
-//                Thread.sleep(1000*5);
-//            }
+            while (true) {
+                Thread.sleep(1000*5);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
