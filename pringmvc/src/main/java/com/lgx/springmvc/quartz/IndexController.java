@@ -30,6 +30,7 @@ public class IndexController {
             Trigger trigger = TriggerBuilder.newTrigger().withIdentity("cj","123").withSchedule(cronScheduleBuilder).build();
             //执行任务
             scheduler.scheduleJob(jobDetail, trigger);
+
         } else {
             System.out.println("当前job已存在--------------------------------------------");
         }

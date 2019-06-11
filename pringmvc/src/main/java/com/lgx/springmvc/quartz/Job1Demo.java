@@ -1,23 +1,33 @@
 package com.lgx.springmvc.quartz;
 
+import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.quartz.QuartzJobBean;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+/**
+ * 自定义任务 Job
+ */
+@Service
 public class Job1Demo extends QuartzJobBean {
     public void sayHello() {
         System.out.println(new Date() + " -> Hello, 我是任务 1");
     }
-
+//    @Value("${test.job.name}")
     private String name;
 
     public void setName(String name) {
         this.name = name;
     }
     @Override
-    protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+    protected void executeInternal(JobExecutionContext context)
+            throws JobExecutionException {
+        // 传入的参数
+        JobDataMap params = context.getJobDetail().getJobDataMap();
         System.out.println(String.format("Hello %s!", this.name));
     }
 }

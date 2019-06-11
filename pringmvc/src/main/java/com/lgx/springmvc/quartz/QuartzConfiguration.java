@@ -1,6 +1,7 @@
 package com.lgx.springmvc.quartz;
 
 import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
 import org.quartz.spi.JobFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -25,9 +26,15 @@ public class QuartzConfiguration {
         return schedulerFactoryBean;
     }
 
-    @Bean
+    @Bean(name = "scheduler")
     public Scheduler scheduler() {
-        return schedulerFactoryBean().getScheduler();
+        Scheduler scheduler = schedulerFactoryBean().getScheduler();
+//        try {
+//            scheduler.start();
+//        } catch (SchedulerException e) {
+//            e.printStackTrace();
+//        }
+        return scheduler;
     }
 
 }
