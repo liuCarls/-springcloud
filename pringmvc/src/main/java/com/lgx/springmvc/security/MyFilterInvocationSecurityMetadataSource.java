@@ -44,7 +44,7 @@ public class MyFilterInvocationSecurityMetadataSource implements FilterInvocatio
      */
     @Override
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
-        System.out.println("-----------------getAttributes-----------------------");
+//        System.out.println("-----------------getAttributes-----------------------");
         if (map == null) {
             loadResourceDefine();
         }

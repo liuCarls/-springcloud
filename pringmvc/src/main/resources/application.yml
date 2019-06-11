@@ -32,3 +32,7 @@ spring:
 #    name: myOwnUser
 #    password: myOwnPassword
 #    role: ADMIN
+
+
+job:
+  calculateTriggerCron: 0 0 23 * * ?   #秒，分钟，小时，天，月，年，星期 ,这个配置的意思是 每天的 23：0：0

@@ -4,8 +4,12 @@ import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
+import javax.sql.DataSource;
 
 @SpringBootApplication
 //@EnableAutoConfiguration(exclude = {
@@ -20,12 +24,12 @@ public class WebApplication {
         logger.info("============= SpringBoot Start Success =============");
     }
 
-//    //DataSource配置
-//    @Bean
-//    @ConfigurationProperties(prefix="spring.datasource")
-//    public DataSource dataSource() {
-//        return new org.apache.tomcat.jdbc.pool.DataSource();
-//    }
+    //DataSource配置
+    @Bean
+    @ConfigurationProperties(prefix="spring.datasource")
+    public DataSource dataSource() {
+        return new org.apache.tomcat.jdbc.pool.DataSource();
+    }
 //
 //    //提供SqlSeesion
 //    @Bean
