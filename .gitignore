@@ -9,3 +9,6 @@
 /feign/target
 /servicerebion/target
 /zuul/target
+/eureka/*.iml
+/config/*.iml
+*.iml
