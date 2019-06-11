@@ -1,0 +1,11 @@
+/.idea
+/pringmvc/target/classes/com/lgx/springmvc/*.class
+*.class
+/pringmvc/target
+/config/target
+/configClient/target
+/eurekaclient/target
+/eurekaclient1/target
+/feign/target
+/servicerebion/target
+/zuul/target
