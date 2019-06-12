@@ -8,10 +8,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.sql.DataSource;
 
 @SpringBootApplication
+@EnableWebMvc
 //@EnableAutoConfiguration(exclude = {
 ////        org.activiti.spring.boot.SecurityAutoConfiguration.class,
 ////        org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class

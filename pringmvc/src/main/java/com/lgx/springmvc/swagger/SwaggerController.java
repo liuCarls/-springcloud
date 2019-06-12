@@ -1,5 +1,7 @@
-package com.lgx.springmvc;
+package com.lgx.springmvc.swagger;
 
+import com.lgx.springmvc.User;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,13 +22,11 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value="/users")
+@Api(value = "SwaggerController|一个用来测试swagger注解的控制器")
 public class SwaggerController {
 
-    /*
-     *  http://localhost:8080/swagger/index.html
-     */
 
-    @ApiOperation(value="Get all users",notes="requires noting")
+    @ApiOperation(value="获取用户列表",notes="requires noting")
     @RequestMapping(value = "user/{id}",method= RequestMethod.GET)
     public List<User> getUsers(){
         List<User> list=new ArrayList<User>();
@@ -41,7 +41,7 @@ public class SwaggerController {
         return list;
     }
 
-    @ApiOperation(value="Get user with id",notes="requires the id of user")
+    @ApiOperation(value="根据用户编号获取用户姓名",notes="requires the id of user")
     @ApiImplicitParam(name = "name", value = "用户ID", required = true, dataType = "Integer", paramType = "path")
     @RequestMapping(value="/{name}",method=RequestMethod.GET)
     public User getUserById(@PathVariable String name){
