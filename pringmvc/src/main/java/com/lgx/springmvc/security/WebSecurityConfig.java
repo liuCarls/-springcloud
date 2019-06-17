@@ -40,16 +40,16 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
  * UsernamePasswordAuthenticationFilter的过滤器
  *
  */
-@Configuration
-@EnableWebSecurity
-@Order(1) //配置多个 HttpSecurity 实例，就像我们可以在xml文件中配置多个 <http>一样。关键在于多次扩展 WebSecurityConfigurationAdapter
+//@Configuration
+//@EnableWebSecurity
+//@Order(1) //配置多个 HttpSecurity 实例，就像我们可以在xml文件中配置多个 <http>一样。关键在于多次扩展 WebSecurityConfigurationAdapter
 
 //@EnableAutoConfiguration
 //  启用方法级别的权限认证
 //@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    UserService userService;
+    IUserDetailService userService;
 
     @Autowired
     MyFilterInvocationSecurityMetadataSource myFilterInvocationSecurityMetadataSource;
@@ -111,6 +111,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        //表单登录
+        http.formLogin().loginPage("/login")
+//                loginProcessingUrl("/login").usernameParameter("username").passwordParameter("password").permitAll()
+//              .defaultSuccessUrl("/hello")  // 登录页，重定向的次数过多，Why?/hello没有放开权限
+//                .and().logout().invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/loginPage").permitAll()
+                .and().exceptionHandling().accessDeniedHandler(authenticationAccessDeniedHandler)
+        ;
+
 
         http.authorizeRequests()
                 .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
@@ -125,12 +133,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
                 .anyRequest().permitAll()
                 .and().csrf().disable()
-                .formLogin().loginPage("/login")
-//                loginProcessingUrl("/login").usernameParameter("username").passwordParameter("password").permitAll()
-//              .defaultSuccessUrl("/hello")
-//                .and().logout().invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/loginPage").permitAll()
-                .and().exceptionHandling().accessDeniedHandler(authenticationAccessDeniedHandler)
-        //  登录页，重定向的次数过多，Why?/hello没有放开权限
+
 //                .and().formLogin().loginPage("/hello")
 //                .usernameParameter("username").passwordParameter("password")
                 //  登录页，可以直接找到这个页面吗？还是必须model中转下？

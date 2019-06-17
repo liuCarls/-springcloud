@@ -15,12 +15,12 @@ public class UploadTask extends QuartzJobBean {
     private IndexController indexController;
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        System.out.println(new Date() + "任务开始------------------------------------");
+//        System.out.println(new Date() + "任务开始------------------------------------");
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(new Date() + "任务结束------------------------------------");
+//        System.out.println(new Date() + "任务结束------------------------------------");
     }
 }

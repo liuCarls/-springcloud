@@ -5,9 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -17,7 +15,7 @@ import javax.sql.DataSource;
 //@EnableGlobalMethodSecurity(prePostEnabled = true) // 启用方法安全设置
 public class WebSecurityConfig2 extends WebSecurityConfigurerAdapter {
     @Autowired
-    UserService userService;
+    IUserDetailService userService;
     /**
      * 自定义的加密算法
      * @return

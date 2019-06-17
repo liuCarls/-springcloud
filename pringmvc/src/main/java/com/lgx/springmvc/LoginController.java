@@ -44,7 +44,11 @@ public class LoginController {
         logger.info("Controller.login");
         return "/login";
     }
-
+    @RequestMapping("/wf")
+    public String workflow() {
+        logger.info("Controller.login");
+        return "/workflow";
+    }
     @RequestMapping("/403")
     public String error403() {
         return "/error/403";
