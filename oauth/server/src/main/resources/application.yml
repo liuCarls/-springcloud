@@ -1,0 +1,27 @@
+security:
+  oauth2:
+    client:
+      client-id: acme
+      client-secret: acmesecret
+      scope: read,write
+      auto-approve-scopes: '.*'
+  user:
+    name: user
+    password: user
+    role: USER
+logging:
+  level:
+    org.springframework.security: DEBUG
+spring:
+  thymeleaf:
+    cache: false # Enable templates caching.
+    check-template-location: true # Check that the templates location exists.
+    content-type: text/html # Content-Type value.
+    enabled: true # Enable MVC Thymeleaf view resolution.
+    encoding: UTF-8 # Template encoding.
+    excluded-view-names: # Comma-separated list of view names that should be excluded from resolution.
+    #    mode: HTML5 # Template mode to be applied to templates. See also StandardTemplateModeHandlers.
+    mode: LEGACYHTML5 # Template mode to be applied to templates. See also StandardTemplateModeHandlers.
+    prefix: classpath:/templates/ # Prefix that gets prepended to view names when building a URL.
+    suffix: .html # Suffix that gets appended to view names when building a URL.
+    template-resolver-order: # Order of the templates resolver in the chain. spring.thymeleaf.view-names= # Comma-separated list of view names that can be resolved.
