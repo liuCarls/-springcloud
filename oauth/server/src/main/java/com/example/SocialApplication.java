@@ -17,7 +17,9 @@ package com.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -38,34 +40,21 @@ import java.util.Map;
 
 @SpringBootApplication
 @Controller
-//@RestController
 // 认证服务器
-@EnableAuthorizationServer
+
 public class SocialApplication {
-
-	@RequestMapping({ "/user", "/me" })
-	@ResponseBody
-	public Map<String, String> user(Principal principal) {
-		Map<String, String> map = new LinkedHashMap<>();
-		map.put("name", principal.getName()+":SERVER");
-		return map;
-	}
-
-	@RequestMapping({ "/home" })
+	@RequestMapping({ "/home", "/" })
 	public String home(Principal principal) {
 		Map<String, String> map = new LinkedHashMap<>();
 		map.put("name", principal.getName()+":SERVER");
 		return "index";
 	}
+
 	@RequestMapping({ "/login" })
 	public String login() {
 		return "login";
 	}
-	@RequestMapping("/hello")
-	@ResponseBody
-	public String Hello() {
-		return "hello word!";
-	}
+
 
 //	@Override
 //	protected void configure(HttpSecurity http) throws Exception {
@@ -77,29 +66,43 @@ public class SocialApplication {
 //				// 增加过滤链，处理要认证的链接
 //		// @formatter:on
 //	}
+
 	@Configuration
-	@EnableWebSecurity
+	@EnableWebSecurity  //只有这个注释才使 formLogin等生效
 	protected class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+		@Override
+		@Bean //分享到oauth2
+		public AuthenticationManager authenticationManagerBean() throws Exception {
+			return super.authenticationManagerBean();
+		}
+
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.authorizeRequests()
-				.antMatchers("/", "/login", "/webjars/**").permitAll()
-				.anyRequest().authenticated()
-
+				.antMatchers( "/login", "/webjars/**", "/oauth/**").permitAll()
+				.anyRequest().authenticated().and().exceptionHandling()
+					.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
 //				.and().formLogin() //默认是index.html
 				.and().formLogin().loginPage("/login")
 				.and().csrf().disable();
+
+
 		}
 	}
 
 	@Configuration
-	@EnableResourceServer
 	protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 		@Override
 		public void configure(HttpSecurity http) throws Exception {
 			// @formatter:off
-			http.antMatcher("/user").authorizeRequests().anyRequest().authenticated();
+//			http.authorizeRequests()
+//				.antMatchers( "/login", "/webjars/**").permitAll()
+//					.and().formLogin().loginPage("/login");
+			http.requestMatchers()
+					.antMatchers("/api/**").and()
+					.authorizeRequests().antMatchers("/user").authenticated();
 			// @formatter:on
+
 		}
 	}
 

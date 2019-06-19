@@ -1,10 +1,11 @@
+#  https://blog.csdn.net/j754379117/article/details/70176974
 security:
-  oauth2:
-    client:
-      client-id: acme
-      client-secret: acmesecret
-      scope: read,write
-      auto-approve-scopes: '.*'
+#  oauth2:
+#    client:
+#      client-id: acme
+#      client-secret: acmesecret
+#      scope: read,write
+#      auto-approve-scopes: '.*'
   user:
     name: user
     password: user
