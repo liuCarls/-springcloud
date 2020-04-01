@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <div class="starter-template">
+        <h2>1. 访问 <a th:href="@{/admin}">管理员页面 (受到SpringSecurity保护，需要管理员权限)</a></h2>
+        <h2>2. 访问 <a th:href="@{/user}">普通用户页面 (受到SpringSecurity保护，需要会员权限)</a></h2>
+        <h2>3. 访问 <a th:href="@{/about}">普通页面</a></h2>
+    </div>
+
+</div>
+
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>
