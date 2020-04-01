@@ -1,0 +1,37 @@
+package com.lgx.springmvc.quartz;
+
+import org.quartz.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+@Controller
+@RequestMapping("/job")
+public class IndexController {
+    @Autowired
+    private Scheduler scheduler;
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public void index() throws SchedulerException {
+        //cron表达式
+        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0/8 * * * * ?");
+        //根据name 和group获取当前trgger 的身份
+        TriggerKey triggerKey = TriggerKey.triggerKey("cronTrigger", "123");
+        CronTrigger triggerOld = null;
+        try {
+            //获取 触发器的信息
+            triggerOld = (CronTrigger) scheduler.getTrigger(triggerKey);
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+        if (triggerOld == null) {
+            //将job加入到jobDetail中
+            JobDetail jobDetail = JobBuilder.newJob(UploadTask.class).withIdentity("job", "123").build();
+            Trigger trigger = TriggerBuilder.newTrigger().withIdentity("cronTrigger","123").withSchedule(cronScheduleBuilder).build();
+            //执行任务
+            scheduler.scheduleJob(jobDetail, trigger);
+        } else {
+            System.out.println("当前job已存在---------------------");
+        }
+    }
+}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="securityDiv">
+    <div class="starter-template">
+        <h2 sec:authorize="hasRole('ROLE_ADMIN')">1. 访问 <a th:href="@{/admin}">管理员页面 (受到SpringSecurity保护，需要管理员权限)</a></h2>
+        <h2 sec:authorize="hasRole('ROLE_USER')">2. 访问 <a th:href="@{/user}">普通用户页面 (受到SpringSecurity保护，需要会员权限)</a></h2>
+        <h2>3. 访问 <a th:href="@{/about}">普通页面</a></h2>
+    </div>
+</div>
+</body>
+</html>

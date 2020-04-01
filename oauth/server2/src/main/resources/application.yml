@@ -1,0 +1,28 @@
+#  https://blog.csdn.net/j754379117/article/details/70176974
+security:
+#  oauth2:
+#    jaxWs_client:
+#      jaxWs_client-id: acme
+#      jaxWs_client-secret: acmesecret
+#      scope: read,write
+#      auto-approve-scopes: '.*'
+  user:
+    name: user
+    password: user
+    role: USER
+logging:
+  level:
+    org.springframework.security: DEBUG
+spring:
+  thymeleaf:
+    cache: false # Enable thymeTmpl caching.
+    check-template-location: true # Check that the thymeTmpl location exists.
+    content-type: text/html # Content-Type value.
+    enabled: true # Enable MVC Thymeleaf view resolution.
+    encoding: UTF-8 # Template encoding.
+    excluded-view-names: # Comma-separated list of view names that should be excluded from resolution.
+    #    mode: HTML5 # Template mode to be applied to thymeTmpl. See also StandardTemplateModeHandlers.
+    mode: LEGACYHTML5 # Template mode to be applied to thymeTmpl. See also StandardTemplateModeHandlers.
+    prefix: classpath:/thymeTmpl/ # Prefix that gets prepended to view names when building a URL.
+    suffix: .html # Suffix that gets appended to view names when building a URL.
+    template-resolver-order: # Order of the thymeTmpl resolver in the chain. spring.thymeleaf.view-names= # Comma-separated list of view names that can be resolved.

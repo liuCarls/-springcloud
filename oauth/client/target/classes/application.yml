@@ -1,0 +1,23 @@
+server:
+  port: 9999
+  session:
+    cookie:
+      name: xxx
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      client-id: acme
+      client-secret: acmesecret
+      access-token-uri: http://localhost:8080/oauth/token
+      user-authorization-uri: http://localhost:8080/oauth/authorize
+    resource:
+      user-info-uri: http://localhost:8080/user
+#      jwt:
+#        key-uri: http://localhost:8080/oauth/token_key
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG

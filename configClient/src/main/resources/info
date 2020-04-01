@@ -1,0 +1,14 @@
+springCloud2.0以前，配置自动刷新步骤如下：
+1.加入依赖
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+ </dependency>
+ 2.在类上,变量上打上@RefreshScope的注解
+ 启动的时候,都会看到
+ RequestMappingHandlerMapping : Mapped "{/refresh,methods=[post]}"
+ 也就是SpringCloud暴露了一个接口 /refresh 来给我们去刷新配置
+ -----
+ springCloud2.0以后
+ 需要在bootstrap.yml里面加上需要暴露出来的地址
+

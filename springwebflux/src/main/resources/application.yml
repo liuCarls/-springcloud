@@ -1,0 +1,12 @@
+logging:
+  level:
+    org.springframework.web: TRACE
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      database: admin
+      port: 27017
+      username: admin
+      password: admin

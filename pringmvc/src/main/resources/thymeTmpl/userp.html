@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<!--<div th:replace="fragments/header :: header"/>-->
+
+<div th:fragment="welUser">
+
+    <div class="starter-template">
+        <h1>普通用户界面 (受到SpringSecurity保护)</h1>
+
+        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <!--<form th:action="@{/logout}" method="post">-->
+            <!--<input type="submit" value="注销"/>-->
+        <!--</form>-->
+    </div>
+
+</div>
+<!--<div th:replace="fragments/footer :: footer"/>-->
+<!-- /.container -->
+
+</body>
+</html>

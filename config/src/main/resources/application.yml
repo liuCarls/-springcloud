@@ -1,0 +1,20 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8888
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+#          uri: https://git.oschina.net/chrywhy/test
+          uri: https://github.com/liuCarls/configs
+          searchPaths: sctest
+#  注意配置文件的url是GIT服务器的仓库地址，
+#  searchPaths配置文件所在的文件夹在仓库中的路径,
+#  在server端不需要指定具体配置文件名， 因为具体的配置文件是什么有应用（也就是client）决定。
+  application:
+    name: config-server
